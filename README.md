@@ -22,10 +22,12 @@
 
     ```
     - apis
-    - entity
+    - migrations
+      - models
     - req
     - res
     - static
+    - utils
     ```
 
 3. 搭建路由`apis`。在子路由中新建`router = APIRouter(prefix="/admin")`，再在`main.py`中加入这个路由：
