@@ -16,12 +16,6 @@ register_tortoise(
 	add_exception_handlers=True  # 生产环境不要开，会泄露调试信息
 )
 
-
 @app.get("/")
 async def root():
 	return {"message": "Hello World"}
-
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-	return {"message": f"Hello {name}"}

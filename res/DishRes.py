@@ -3,6 +3,7 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
+
 @dataclass
 class DishFlavor:
 	"""DishFlavor"""
@@ -10,6 +11,7 @@ class DishFlavor:
 	id: int | None = None
 	name: str | None = None
 	value: str | None = None
+
 
 @dataclass
 class DishCommonRes:

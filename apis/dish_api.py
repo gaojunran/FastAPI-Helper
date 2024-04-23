@@ -1,7 +1,6 @@
 from fastapi import APIRouter
-from fastapi.params import Query
 
-from models.models import Dish, Flavor, Setmeal
+from models.models import Dish, Flavor
 from req.DishReq import DishCommonReq
 from res.DishRes import DishCommonRes
 from static.Result import Result
