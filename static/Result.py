@@ -11,7 +11,7 @@ class Result:
 	data: dict
 
 	@classmethod
-	def success(cls, data: dict | list | None = None):
+	def success(cls, data=None):
 		return Result(API["SUCCESS_CODE"], 'success', to_camel(data))
 
 	# 一般都用HttpException
@@ -25,4 +25,3 @@ class Result:
 			"total": len(lst),
 			"records": lst
 		})
-

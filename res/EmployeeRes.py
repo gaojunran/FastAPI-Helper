@@ -1,9 +1,10 @@
+from dataclasses import dataclass
 from typing import Optional
 
 from pydantic import BaseModel
 
-
-class EmployeeLoginRes(BaseModel):
+@dataclass
+class EmployeeLoginRes:
     """EmployeeLoginVO，员工登录返回的数据格式"""
     """主键值"""
     id: Optional[int] = None

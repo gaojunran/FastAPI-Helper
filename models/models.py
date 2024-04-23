@@ -198,6 +198,7 @@ class Employee(GeneralModel):
 """
 
 
+# @auto_setter
 class Dish(GeneralModel):
 	id = fields.IntField(pk=True)
 	name = fields.CharField(max_length=50, description="菜品名称")
@@ -207,6 +208,10 @@ class Dish(GeneralModel):
 	image = fields.CharField(max_length=255, description="图片")
 	description = fields.CharField(max_length=255, description="描述信息")
 	status = fields.IntField(description="0 停售; 1 起售")
+	flavors = fields.ManyToManyField("models.Flavor", related_name="dishes", description="口味")
+
+
+# setmeals = fields.ManyToManyField("models.Setmeal", related_name="dishes", description="套餐")
 
 
 """{
@@ -290,6 +295,112 @@ class Category(GeneralModel):
 	name = fields.CharField(max_length=50, description="分类名称")
 	sort = fields.IntField(description="顺序")
 	status = fields.IntField(description="分类状态 0:禁用，1:启用")
+
+
+"""
+{
+    "properties": {
+        "id": {
+            "description": "主键",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+        },
+        "category_id": {
+            "description": "菜品分类id",
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+        },
+        "name": {
+            "description": "套餐名称",
+            "type": "string",
+            "maxLength": 32
+        },
+        "price": {
+            "description": "套餐价格",
+            "type": "number"
+        },
+        "status": {
+            "description": "售卖状态 0:停售 1:起售",
+            "default": "1",
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+        },
+        "description": {
+            "description": "描述信息",
+            "type": "string",
+            "maxLength": 255
+        },
+        "image": {
+            "description": "图片",
+            "type": "string",
+            "maxLength": 255
+        },
+        "create_time": {
+            "description": "创建时间",
+            "type": "string",
+            "format": "date-time"
+        },
+        "update_time": {
+            "description": "更新时间",
+            "type": "string",
+            "format": "date-time"
+        },
+        "create_user": {
+            "description": "创建人",
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+        },
+        "update_user": {
+            "description": "修改人",
+            "type": "integer",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+        }
+    },
+    "type": "object",
+    "required": [
+        "id",
+        "category_id",
+        "name",
+        "price"
+    ],
+    "x-apifox-orders": [
+        "id",
+        "category_id",
+        "name",
+        "price",
+        "status",
+        "description",
+        "image",
+        "create_time",
+        "update_time",
+        "create_user",
+        "update_user"
+    ]
+}
+
+"""
+
+
+class Setmeal(GeneralModel):
+	id = fields.IntField(pk=True)
+	category = fields.IntField(description="菜品分类id")
+	name = fields.CharField(max_length=50, description="套餐名称")
+	price = fields.FloatField(description="套餐价格")
+	status = fields.IntField(description="售卖状态 0:停售 1:起售")
+	description = fields.CharField(max_length=255, description="描述信息")
+	image = fields.CharField(max_length=255, description="图片")
+	dishes = fields.ManyToManyField("models.Dish", related_name="setmeals", description="菜品")
+
+
+class Flavor(GeneralModel):
+	id = fields.IntField(pk=True)
+	name = fields.CharField(max_length=32, description="口味名称")
+	value = fields.CharField(max_length=255, description="口味值")
 
 
 if __name__ == '__main__':
